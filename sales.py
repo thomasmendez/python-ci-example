@@ -43,6 +43,25 @@ def extractItem(line):
     # create a item from info extracted
     return (Item(quantity, imported, cost))
 
+def op():
+
+    try:
+        f = open('./input/input1.txt', "r")
+
+        items = []
+
+        for line in f:
+
+            item = extractItem(line)
+            items.append(item)
+
+        f.close()
+
+        return items
+
+    except FileNotFoundError:
+        raise FileNotFoundError("Input file does not exist")
+
 def imp():
 
     items = []
