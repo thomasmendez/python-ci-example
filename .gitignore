@@ -130,3 +130,6 @@ dmypy.json
 
 # Code Editor
 .vscode
+
+# MAC OSX
+.DS_Store
