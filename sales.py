@@ -18,6 +18,31 @@
 
 from item import Item
 
+def extractItem(line):
+
+    line = line.split(' ')
+
+    lenght = len(line)
+    quantity = line[0]
+    imported = False
+    cost = line[lenght-1]
+
+    try:
+        quantity = int(quantity)
+    except ValueError:
+        raise ValueError("Input[0] must be a integer")
+
+    if line in ['imported']:
+        imported = True
+
+    try:
+        cost = float(cost)
+    except ValueError:
+        raise ValueError("Input[3] should be a float")
+
+    # create a item from info extracted
+    return (Item(quantity, imported, cost))
+
 def imp():
 
     items = []
@@ -28,30 +53,8 @@ def imp():
         # format: "int str at float"
         if line:
 
-            line = line.split(' ')
-
-            lenght = len(line)
-
-            quantity = line[0]
-            imported = False
-            cost = line[lenght-1]
-
-            try:
-                int(quantity)
-            except ValueError:
-                print("Input[0] must be a integer")
-
-            if line in ['imported']:
-                imported = True
-
-            try:
-                float(cost)
-            except:
-                print("Input[3] should be a float")
-
-            # create a item from info extracted
-            item = Item(quantity, imported, cost)
-
+            item = extractItem(line)
+            
             # add our item to list of items
             items.append(item)
 
@@ -65,7 +68,6 @@ def impLine():
 
     lineLenght = input("Enter line lenght")
 
-    
     imp = input("Enter line info")
 
     inputLine = []
@@ -76,26 +78,6 @@ def impLine():
     
     inputLine = ''.join(inputLine)
 
-    inputLine = inputLine.split(' ')
+    item = extractItem(inputLine)
 
-    lenght = len(inputLine)
-
-    quantity = inputLine[0]
-    imported = False
-    cost = inputLine[lenght-1]
-
-    try:
-        quantity = int(quantity)
-    except ValueError:
-        print("Input[0] must be a integer")
-
-    if inputLine in ['imported']:
-        imported = True
-
-    try:
-        cost = float(cost)
-    except:
-        print("Input[3] should be a float")
-
-    # create a item from info extracted
-    return Item(quantity, imported, cost)
+    return item
