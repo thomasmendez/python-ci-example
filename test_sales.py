@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 from item import Item
 
-from sales import imp, impLine, extractItem
+from sales import imp, impLine, extractItem, op
 
 class TestSales(unittest.TestCase):
 
@@ -48,3 +48,11 @@ class TestSales(unittest.TestCase):
         line2 = '14.99 music CD at 1'
         self.assertRaises(ValueError, extractItem, line1)
         self.assertRaises(ValueError, extractItem, line2)
+
+    def testFileInput(self):
+        result = op()
+        items = [Item(1, False, 12.49), Item(1, False, 14.99), Item(1, False, 0.85)]
+        self.assertIsInstance(result, list)
+        self.assertEqual(result[0].quantity, items[0].quantity)
+        self.assertEqual(result[0].imported, items[0].imported)
+        self.assertEqual(result[0].cost, items[0].cost)
